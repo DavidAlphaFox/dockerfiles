@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM debian:9
 
 ENV RUBY_VERSION "2.4.1"
 
@@ -6,16 +6,12 @@ MAINTAINER David Gao "https://github.com/DavidAlphaFox/"
 
 # == Ubuntu Mirror on 163 for China network
 RUN \
-    echo "deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse" > /etc/apt/sources.list && \
-    echo "deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb http://mirrors.163.com/debian stretch main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb-src http://mirrors.163.com/debian stretch main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.163.com/debian-security stretch/updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb-src http://mirrors.163.com/debian-security stretch/updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.163.com/debian stretch-updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb-src http://mirrors.163.com/debian stretch-updates main contrib non-free" >> /etc/apt/sources.list
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -27,9 +23,9 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.lis
 
 # == Install Packages for Ruby Environments.
 RUN apt-get update && apt-get install -y software-properties-common wget vim build-essential emacs-nox \
-    openssl libreadline6-dev libsqlite3-dev libmysqlclient-dev libpq-dev tzdata \
-    curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf \
-    automake cmake libtool imagemagick libmagickwand-dev libpcre3-dev language-pack-zh-hans \
+    openssl libreadline6-dev libsqlite3-dev libmariadbclient-dev libpq-dev tzdata \
+    git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf \
+    automake cmake libtool imagemagick libmagickwand-dev libpcre3-dev \
     libevent-dev libgmp-dev libgmp3-dev redis-tools nodejs yarn htop
 
 ENV TZ Etc/UTC

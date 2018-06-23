@@ -8,9 +8,14 @@ ENV TZ Etc/UTC
 RUN ln -sf /user/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum update -y
-RUN yum install -y emacs-nox vim gcc gdbm-devel libdb4-devel libffi-devel libyaml \
-    libyaml-devel ncurses-devel openssl-devel readline-devel tcl-devel git
+
+RUN yum update -y && yum install -y curl wget
+RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+
+RUN wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+
+RUN yum update && yum install -y emacs-nox vim gcc gdbm-devel libdb4-devel libffi-devel libyaml \
+    libyaml-devel ncurses-devel openssl-devel readline-devel tcl-devel git nodejs yarn
 RUN yum -y groupinstall "Development Tools"
 
 RUN yum clean all
