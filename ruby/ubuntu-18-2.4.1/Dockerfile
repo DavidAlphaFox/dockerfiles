@@ -4,8 +4,6 @@ ENV RUBY_VERSION "2.4.1"
 
 MAINTAINER David Gao 
 
-RUN echo "0.0.1" > /VERSION
-
 # == Ubuntu Mirror on 163 for China network
 RUN \
     echo "deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse" > /etc/apt/sources.list && \
