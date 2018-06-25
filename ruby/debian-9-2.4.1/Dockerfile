@@ -22,11 +22,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
 # == Install Packages for Ruby Environments.
-RUN apt-get update && apt-get install -y software-properties-common wget vim build-essential emacs-nox \
+RUN apt-get update && apt-get install -y software-properties-common wget build-essential \
     openssl libreadline6-dev libsqlite3-dev libmariadbclient-dev libpq-dev tzdata \
     git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf \
     automake cmake libtool imagemagick libmagickwand-dev libpcre3-dev \
-    libevent-dev libgmp-dev libgmp3-dev redis-tools nodejs yarn htop
+    libevent-dev libgmp-dev libgmp3-dev redis-tools nodejs yarn
 
 ENV TZ Etc/UTC
 RUN ln -sf /user/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
@@ -38,15 +38,6 @@ RUN apt-get clean && \
 
 
 
-# Install Ruby
-#RUN /bin/bash -l -c "gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
-#RUN curl -L https://get.rvm.io | bash -s stable
-#Set env just in case
-#ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-#RUN /bin/bash -l -c "rvm requirements"
-#RUN /bin/bash -l -c "rvm install ${RUBY_VERSION}"
-#RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
-#RUN /bin/bash -l -c "rvm use ${RUBY_VERSION} --default"
 
 # Install Ruby
 RUN echo 'gem: --no-document' >> /usr/local/etc/gemrc &&\
