@@ -14,7 +14,7 @@ RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 
 RUN wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
 
-RUN yum update && yum install -y gcc gdbm-devel libdb4-devel libffi-devel libyaml \
+RUN yum update && yum install -y gcc gdbm-devel libdb4-devel libffi-devel libyaml postgresql-devel \
     libyaml-devel ncurses-devel openssl-devel readline-devel tcl-devel git nodejs yarn
 RUN yum -y groupinstall "Development Tools"
 
